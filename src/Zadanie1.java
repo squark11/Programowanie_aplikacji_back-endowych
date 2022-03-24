@@ -1,7 +1,7 @@
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 
-public class Main1 {
+public class Zadanie1 {
     public static void main(String[] args){
 
         File file = new File("file.txt");
