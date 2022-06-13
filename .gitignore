@@ -144,3 +144,4 @@ ServicesApp/WorkerService/bin/
 ServicesApp/WorkerService/obj/
 
 *.user
+/ServicesApp/ServiceApp.Library/bin/Debug/net6.0
