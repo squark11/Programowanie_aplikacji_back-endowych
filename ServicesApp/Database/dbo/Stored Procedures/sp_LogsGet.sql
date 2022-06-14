@@ -4,6 +4,6 @@ BEGIN
 	set nocount on;
 	SELECT 
 		l.AuthorId, l.RequestedDate, l.[Description], 
-		l.RequestedArgs, l.RequestedUrl, l.ResponeMessage 
+		l.RequestedArgs, l.RequestedUrl, l.Method, l.ResponeMessage 
 	FROM Logs as l;
 END
