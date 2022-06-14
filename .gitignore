@@ -149,3 +149,7 @@ ServicesApp/WorkerService/obj/
 ServicesApp/ServiceApp.Library/obj/
 
 ServicesApp/WorkerService.Library/obj/
+
+ServicesApp/Database/Database.publish.xml
+
+ServicesApp/WorkerService.Library/bin/
