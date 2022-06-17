@@ -3,7 +3,9 @@ AS
 BEGIN
 	set nocount on;
 	SELECT 
-		l.AuthorId, l.RequestedDate, l.[Description], 
-		l.RequestedArgs, l.RequestedUrl, l.Method, l.ResponeMessage 
+		l.AuthorId as AuthorId, l.RequestedUrl as RequestedUrl,
+		l.Method as Method, l.RequestedArgs as RequestedArgs,
+		l.RequestedDate as RequestedDate, l.[Description] as [Description],
+		l.ResponeMessage as ResponeMessage
 	FROM Logs as l;
 END

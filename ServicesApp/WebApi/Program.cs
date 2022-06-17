@@ -3,8 +3,10 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using ServiceApp.Library.DbAccess;
 using System.Text;
 using WebApi.Data;
+using WebApi.Library.Data;
 using WebApi.Library.Helpers;
 
 IConfiguration configuration = new ConfigurationBuilder()
@@ -91,6 +93,11 @@ builder.Services.AddSwaggerGen(c =>
         }
     });
 });
+
+//My services
+builder.Services.AddScoped<ISqlDataAccess, SqlDataAccess>();
+builder.Services.AddScoped<ILogsData, LogsData>();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
