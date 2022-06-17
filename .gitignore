@@ -153,3 +153,11 @@ ServicesApp/WorkerService.Library/obj/
 ServicesApp/Database/Database.publish.xml
 
 ServicesApp/WorkerService.Library/bin/
+
+ServicesApp/WebApi/appsettings.json
+
+ServicesApp/WorkerService/appsettings.json
+
+ServicesApp/Database/Database.dbmdl
+
+ServicesApp/Database/Database.jfm

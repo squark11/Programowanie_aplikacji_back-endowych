@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using WebApi.Library.Data;
 using WebApi.Library.Models;
@@ -16,6 +17,7 @@ namespace WebApi.Controllers
             _data = data;
         }
 
+        [Authorize]
         [HttpGet]
         public async Task<IEnumerable<LogModel>> GetLogs()
         {

@@ -97,6 +97,7 @@ builder.Services.AddSwaggerGen(c =>
 //My services
 builder.Services.AddScoped<ISqlDataAccess, SqlDataAccess>();
 builder.Services.AddScoped<ILogsData, LogsData>();
+builder.Services.AddScoped<IProductsData, ProductsData>();
 
 var app = builder.Build();
 
