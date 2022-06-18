@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Text.Json;
 using WebApi.Library.Data;
 using WebApi.Library.Helpers;
 using WebApi.Library.Models;
@@ -23,7 +24,7 @@ namespace WebApi.Controllers
         public async Task<IEnumerable<ProductModel>> Get()
         {
             var products = await _data.GetAsync();
-            await Send(null,"Getting products", products.ToString());
+            await Send(null, "Getting products", JsonSerializer.Serialize<IEnumerable<ProductModel>>(products));
             return await _data.GetAsync();
         }
         [Authorize]

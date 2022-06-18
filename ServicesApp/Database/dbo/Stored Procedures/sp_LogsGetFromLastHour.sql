@@ -1,4 +1,5 @@
-﻿CREATE PROCEDURE [dbo].[sp_LogsGet]
+﻿CREATE PROCEDURE [dbo].[sp_LogsGetFromLastHour]
+	@Date datetime2
 AS
 BEGIN
 	set nocount on;
@@ -8,5 +9,6 @@ BEGIN
 		l.RequestedDate as RequestedDate, l.[Description] as [Description],
 		l.ResponeMessage as ResponeMessage
 	FROM Logs as l
+	WHERE l.RequestedDate >= @Date
 	ORDER BY l.RequestedDate DESC
 END

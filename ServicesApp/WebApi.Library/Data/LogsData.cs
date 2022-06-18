@@ -16,5 +16,9 @@ namespace WebApi.Library.Data
         {
             return await _data.LoadDataAsync<LogModel, dynamic>("[dbo].[sp_LogsGet]", new { }, "ServiceApp");
         }
+        public async Task<IEnumerable<LogModel>> GetLogsFromLastHourAsync()
+        {
+            return await _data.LoadDataAsync<LogModel, dynamic>("[dbo].[sp_LogsGetFromLastHour]", new { Date = DateTime.Now.AddHours(-1) }, "ServiceApp");
+        }
     }
 }
