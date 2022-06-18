@@ -4,6 +4,7 @@ using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
+using WebApi.Library.Helpers;
 using WebApi.Library.Models;
 
 namespace WebApi.Controllers
@@ -14,17 +15,20 @@ namespace WebApi.Controllers
     {
         private readonly UserManager<IdentityUser> _userManager;
         private readonly IConfiguration _config;
+        private readonly ILogSender _log;
 
-        public UserController(UserManager<IdentityUser> userManager, IConfiguration config)
+        public UserController(UserManager<IdentityUser> userManager, IConfiguration config, ILogSender log)
         {
             _userManager = userManager;
             _config = config;
+            _log = log;
         }
         [HttpPost("register")]
         public async Task<IActionResult> Register(string username, string email, string password)
         {
             if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
             {
+                await Send($"{username}, {email}", $"Cannot create user", "BadRequest");
                 return BadRequest();
             }
             var newUser = new IdentityUser()
@@ -37,9 +41,11 @@ namespace WebApi.Controllers
 
             if (result.Succeeded)
             {
+                await Send($"{username}, {email}", $"User has been created", "Ok");
                 return Ok(result);
             }
 
+            await Send($"{username}, {email}", $"Cannot create user", "BadRequest");
             return BadRequest(result);
         }
         [Route("/token")]
@@ -124,6 +130,11 @@ namespace WebApi.Controllers
             }
 
             return user;
+        }
+
+        private async Task Send(string? args, string descrioption, string? responseMessage)
+        {
+            await _log.Send(this.User?.Identity?.Name, this.Request?.Path.ToString(), this.Request?.Method, args, descrioption, responseMessage);
         }
     }
 }

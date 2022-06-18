@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace WebApi.Library.Models
+﻿namespace WebApi.Library.Models
 {
     public class LogModel
     {
@@ -15,5 +9,10 @@ namespace WebApi.Library.Models
         public DateTime RequestedDate { get; set; }
         public string Description { get; set; }
         public string ResponeMessage { get; set; }
+        public override string ToString()
+        {
+            return $"AuthorId: {AuthorId}, RequestedUrl: {RequestedUrl}, Method: {Method}, RequestedArgs: {RequestedArgs}"
+                + ", RequestedDate: {RequestedDate}, Description {Description}, ResponeMessage: {ResponeMessage}";
+        }
     }
 }
