@@ -11,9 +11,16 @@ Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "Database", "Database\Databa
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WorkerService", "WorkerService\WorkerService.csproj", "{EE0A7FF6-E935-4D8E-950C-523CB0D3EA94}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceApp.Library", "ServiceApp.Library\ServiceApp.Library.csproj", "{078B9553-AC27-4803-9069-795F156712D7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ServiceApp.Library", "ServiceApp.Library\ServiceApp.Library.csproj", "{078B9553-AC27-4803-9069-795F156712D7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WorkerService.Library", "WorkerService.Library\WorkerService.Library.csproj", "{BC85E513-DDB0-4491-ABF4-6BB3552837B0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WorkerService.Library", "WorkerService.Library\WorkerService.Library.csproj", "{BC85E513-DDB0-4491-ABF4-6BB3552837B0}"
+EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{331C4A22-E588-434C-9D61-14964B116755}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".docker", ".docker", "{B7E54C16-E6A3-4D04-B049-C480DA892147}"
+	ProjectSection(SolutionItems) = preProject
+		setup.sql = setup.sql
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -47,6 +54,10 @@ Global
 		{BC85E513-DDB0-4491-ABF4-6BB3552837B0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BC85E513-DDB0-4491-ABF4-6BB3552837B0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BC85E513-DDB0-4491-ABF4-6BB3552837B0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{331C4A22-E588-434C-9D61-14964B116755}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{331C4A22-E588-434C-9D61-14964B116755}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{331C4A22-E588-434C-9D61-14964B116755}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{331C4A22-E588-434C-9D61-14964B116755}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

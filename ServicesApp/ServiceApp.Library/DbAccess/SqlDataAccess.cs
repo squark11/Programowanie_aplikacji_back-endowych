@@ -27,13 +27,6 @@ namespace ServiceApp.Library.DbAccess
 
             return await connection.QueryAsync<T>(view, commandType: CommandType.Text);
         }
-        public async Task<IEnumerable<T>> LoadMultipleMapDataAsync<T, U, O>(string storedProcedure, U parameters, Func<T, O, T> func, string connectionId = "Default")
-        {
-            var cs = _config.GetConnectionString(connectionId);
-            using IDbConnection connection = new SqlConnection(cs);
-
-            return await connection.QueryAsync<T, O, T>(storedProcedure, func, param: parameters, commandType: CommandType.StoredProcedure);
-        }
 
         public async Task SaveDataAsync<T>(string storedProcedire, T parameters, string connectionId = "Default")
         {

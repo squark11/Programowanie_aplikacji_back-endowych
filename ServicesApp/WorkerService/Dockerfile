@@ -6,6 +6,9 @@ WORKDIR /app
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
 COPY ["WorkerService/WorkerService.csproj", "WorkerService/"]
+COPY ["WorkerService.Library/WorkerService.Library.csproj", "WorkerService.Library/"]
+COPY ["ServiceApp.Library/ServiceApp.Library.csproj", "ServiceApp.Library/"]
+COPY ["WebApi.Library/WebApi.Library.csproj", "WebApi.Library/"]
 RUN dotnet restore "WorkerService/WorkerService.csproj"
 COPY . .
 WORKDIR "/src/WorkerService"

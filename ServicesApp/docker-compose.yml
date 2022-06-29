@@ -1,0 +1,51 @@
+version: '3.4'
+
+services:
+  rabbitmq:
+    image: rabbitmq:3.10-management
+    container_name: 'rabbitmq'
+
+  db:
+    image: "mcr.microsoft.com/mssql/server"
+    environment:
+        SA_PASSWORD: "Password1!"
+        ACCEPT_EULA: "Y"
+        MYSQL_DATABASE: ServiceApp
+    volumes:
+        - ./docker:/docker-entrypoint-initdb.d
+    ports:
+        - 1433:1433
+
+
+
+  workerservice:
+    image: ${DOCKER_REGISTRY-}workerservice
+    build:
+      context: .
+      dockerfile: WorkerService/Dockerfile
+    depends_on:
+        - db
+        - rabbitmq
+
+  webapi:
+    image: ${DOCKER_REGISTRY-}webapi
+    restart: always
+    build:
+      context: .
+      dockerfile: WebApi/Dockerfile
+    ports:
+      - 5001:80
+    depends_on:
+        - db
+        - rabbitmq
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:80
+    volumes:
+      - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
+      - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
+
+networks:
+  default:
+    name: network-aa
+

@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using ServiceApp.Library.DbAccess;
+using System.Net;
 using System.Text;
 using WebApi.Data;
 using WebApi.Library.Data;
@@ -18,7 +19,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(
-        connectionString: configuration.GetConnectionString("ToDoAppAuthDb")
+        connectionString: configuration.GetConnectionString("ServiceAppAuth")
         ));
 
 builder.Services.AddIdentity<IdentityUser, IdentityRole>(config =>
@@ -53,13 +54,15 @@ builder.Services.AddMassTransit(x =>
 {
     x.UsingRabbitMq((context, cfg) =>
     {
-        cfg.Host("localhost");
+        var ip = Dns.GetHostEntry("rabbitmq").AddressList.FirstOrDefault(x => x.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork);
+        cfg.Host(ip.ToString());
+
         cfg.ConfigureEndpoints(context);
     });
 });
 
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+
 builder.Services.AddEndpointsApiExplorer();
 
 builder.Services.AddScoped<ILogSender, LogSender>();
@@ -101,7 +104,6 @@ builder.Services.AddScoped<IProductsData, ProductsData>();
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
 app.UseSwagger();
 app.UseSwaggerUI();
 
@@ -111,12 +113,7 @@ using (var serviceScope = app.Services.GetService<IServiceScopeFactory>().Create
     context.Database.EnsureCreated();
 }
 
-app.UseHttpsRedirection();
-
-//Who are you?
 app.UseAuthentication();
-
-//Are you allowed?
 app.UseAuthorization();
 
 app.MapControllers();
